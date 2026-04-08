@@ -56,3 +56,5 @@ g++ calculator.cpp -o calculator
 ## 📄 License
 
 This project is free to use for learning purposes.
+
+All tasks done.
