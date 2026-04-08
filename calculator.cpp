@@ -1,38 +1,80 @@
 #include <iostream>
-using namespace std;
+#include <limits>
+
+// Function declarations
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b) {
+    if (b == 0) {
+        std::cout << "Error: Division by zero is not allowed." << std::endl;
+        return 0;
+    }
+    return a / b;
+}
+
+// Function to safely get numeric input
+double getNumber() {
+    double num;
+    while (true) {
+        std::cin >> num;
+
+        if (std::cin.fail()) {
+            std::cout << "Invalid input. Please enter a number: ";
+            std::cin.clear(); // clear error flags
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        } else {
+            return num;
+        }
+    }
+}
 
 int main() {
     double num1, num2;
     char op;
 
-    cout << "Simple Calculator\n";
-    cout << "Enter first number: ";
-    cin >> num1;
+    std::cout << "Simple Calculator\n";
 
-    cout << "Enter an operator (+, -, *, /): ";
-    cin >> op;
+    std::cout << "Enter first number: ";
+    num1 = getNumber();
 
-    cout << "Enter second number: ";
-    cin >> num2;
+    std::cout << "Enter an operator (+, -, *, /): ";
+    std::cin >> op;
 
-    switch(op) {
+    std::cout << "Enter second number: ";
+    num2 = getNumber();
+
+    double result;
+
+    switch (op) {
         case '+':
-            cout << "Result: " << num1 + num2 << endl;
+            result = add(num1, num2);
+            std::cout << "Result: " << result << std::endl;
             break;
         case '-':
-            cout << "Result: " << num1 - num2 << endl;
+            result = subtract(num1, num2);
+            std::cout << "Result: " << result << std::endl;
             break;
         case '*':
-            cout << "Result: " << num1 * num2 << endl;
+            result = multiply(num1, num2);
+            std::cout << "Result: " << result << std::endl;
             break;
         case '/':
-            if(num2 != 0)
-                cout << "Result: " << num1 / num2 << endl;
-            else
-                cout << "Error: Division by zero is not allowed." << endl;
+            result = divide(num1, num2);
+            if (num2 != 0)
+                std::cout << "Result: " << result << std::endl;
             break;
         default:
-            cout << "Error: Invalid operator." << endl;
+            std::cout << "Error: Invalid operator." << std::endl;
     }
 
     return 0;
